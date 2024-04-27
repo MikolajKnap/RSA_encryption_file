@@ -1,6 +1,6 @@
 import random
 import math
-
+import sys
 
 #Functions
 
@@ -65,3 +65,22 @@ print("Cipher: ", cipher_text)
 decoded_message = [pow(ch, d, n) for ch in cipher_text] # ASCII conversion
 message = "".join(chr(ch) for ch in decoded_message)
 print("Decrypted: ", message)
+
+## File encryption
+
+# Read file
+file_name = sys.argv[1]
+with open(file_name, "rb") as file:
+    content = file.read()
+
+# Encrypt file
+encoded_content = [ch for ch in content]
+cipher_content = [pow(ch, e, n) for ch in encoded_content]
+
+# Save encrypted file content
+encrypted_file_name = "encrypted_file.txt"
+with open(encrypted_file_name, "w") as encrypted_file:
+    for item in cipher_content:
+        encrypted_file.write("%s\n" % item)
+
+print("File encrypted and saved as: ", encrypted_file_name)
